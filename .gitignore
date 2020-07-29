@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# But not these
+!.gitignore
+!*.sqb
+!*.sh
+!*.sql
+!README.md
+
+!*/
