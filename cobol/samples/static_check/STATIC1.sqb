@@ -1,0 +1,93 @@
+
+      ******************************************************************
+      **
+      ** SOURCE FILE NAME: static.sqb 
+      **
+      ** SAMPLE: Get table data using static SQL statement
+      **
+      **         This sample demonstrates how to get table data using 
+      **         static SQL. It will output the entry in the FIRSTNME 
+      **         column where the entry in the LASTNAME column equals
+      **         "JOHNSON". Otherwise, an error message will be 
+      **         printed.
+      **
+      ** SQL STATEMENTS USED:
+      **         BEGIN DECLARE SECTION 
+      **         END DECLARE SECTION 
+      **         CONNECT
+      **         SELECT
+      **
+      ** OUTPUT FILE: static.out (available in the online documentation)
+      ******************************************************************
+      **
+      ** For more information on the sample programs, 
+      ** see the README file. 
+      **
+      ** For information on developing COBOL applications, see the 
+      ** Application Development Guide.
+      **
+      ** For information on using SQL statements, see the SQL Reference. 
+      **
+      ** For the latest information on programming, compiling, and 
+      ** running DB2 applications, visit the DB2 application
+      **  website:  development
+      **     http://www.software.ibm.com/data/db2/udb/ad
+      ******************************************************************
+
+       Identification Division.
+       Program-ID. STATIC1.
+
+       Data Division.
+       Working-Storage Section.
+
+           copy "sql.cbl".
+           copy "sqlca.cbl".                                            
+
+           EXEC SQL BEGIN DECLARE SECTION END-EXEC.                     
+       01 firstname         pic x(12).
+       01 userid            pic x(8).
+       01 passwd.
+         49 passwd-length   pic s9(4) comp-5 value 0.
+         49 passwd-name     pic x(18).
+           EXEC SQL END DECLARE SECTION END-EXEC.
+
+       77 errloc          pic x(80).
+
+       Procedure Division.
+       Main Section.
+           display "Sample COBOL program: STATIC1".
+
+           display "Enter your user id (default none): " 
+                with no advancing.
+           accept userid.
+
+           if userid = spaces
+             EXEC SQL CONNECT TO MYSAMPLE END-EXEC
+           else
+             display "Enter your password : " with no advancing
+             accept passwd-name.
+
+      * Passwords in a CONNECT statement must be entered in a VARCHAR
+      * format with the length of the input string.
+           inspect passwd-name tallying passwd-length for characters
+              before initial " ".
+
+           EXEC SQL CONNECT TO mysample USER :userid USING :passwd      
+              END-EXEC.
+           move "CONNECT TO" to errloc.
+           call "CHECKERR" using SQLCA errloc.
+
+           EXEC SQL SELECT FIRSTNME INTO :firstname                    
+                    FROM EMPLOYEE
+                    WHERE LASTNAME = 'JOHNSON' END-EXEC.
+           move "SELECT" to errloc.
+           call "CHECKERR" using SQLCA errloc.                         
+
+           display "First name = ", firstname.
+
+           EXEC SQL CONNECT RESET END-EXEC.                            
+           move "CONNECT RESET" to errloc.
+           call "CHECKERR" using SQLCA errloc.
+
+       End-Prog.
+           stop run.

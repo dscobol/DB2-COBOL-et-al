@@ -1,0 +1,118 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. CONNDB.
+       DATA DIVISION.
+       FILE SECTION.
+       working-storage section.
+
+      *  Include the SQL Communications Area. This includes the
+      *  definitions of SQLCODE, etc
+
+           EXEC SQL INCLUDE SQLCA END-EXEC.
+
+       *> DB2 UDB limits database alias names to 8 characters
+       *> other DB2 servers such DB2/MVS can have database names up to
+       *> 18 characters which you can still access via DB2 CONNECT
+       *> by creating an ALIAS name for the database with a max of 8
+       *> characters
+        EXEC SQL BEGIN DECLARE SECTION END-EXEC.
+       01 ws-db        pic x(08).
+       01 ws-usr       pic x(08).
+       01 ws-pass      pic x(18).
+       01 ws-var-pass.
+          49 ws-var-pass-len   pic s9(04) comp-5.
+          49 ws-var-pass-dat   pic x(18).
+        EXEC SQL END DECLARE SECTION END-EXEC.
+
+       procedure division.
+
+       *>  Connect to an IBM DB2 Sample database
+           display "Connect statement tests"
+           display " "
+           display "Enter database alias to connect to (Eg MYSAMPLE) "
+                   with no advancing
+           accept ws-db
+           display "Enter username  "
+                    with no advancing
+           accept ws-usr
+           display "Enter password  "
+                    with no advancing
+           accept ws-pass
+
+       *>  test 1 - basic type 1 CONNECT without id or password
+           display "Test 1:"
+
+               EXEC SQL
+               CONNECT TO :ws-db
+               END-EXEC
+           if sqlcode not = 0
+                display "Error: cannot connect "
+                display sqlcode
+                display sqlerrmc
+                stop run
+           else
+              display "Test 1: OK"
+              EXEC SQL
+                   DISCONNECT CURRENT
+              END-EXEC
+              if sqlcode not = 0
+                  display "Error: cannot disconnect "
+                  display sqlcode
+                  display sqlerrmc
+                  stop run
+              end-if
+          end-if
+
+        *>test2
+        *>type 1 connect with id / password passed as char fields
+           display "Test 2:"
+           EXEC SQL
+               CONNECT TO :ws-db USER :ws-usr  USING :ws-pass
+           END-EXEC
+           if sqlcode not = 0
+                display "Error: cannot connect Test 2 "
+                display sqlcode
+                display sqlerrmc
+                stop run
+           end-if
+           display "Test 2: OK"
+
+           EXEC SQL
+               DISCONNECT CURRENT
+           END-EXEC
+           if sqlcode not = 0
+                display "Error: cannot disconnect "
+                display sqlcode
+                display sqlerrmc
+                stop run
+           end-if
+
+        *>test3
+        *>type 1 connect with id / password passed as varchar field
+           display "Test 3:"
+           move 0                                   to  ws-var-pass-len
+           move ws-pass                             to  ws-var-pass-dat
+           inspect ws-pass tallying ws-var-pass-len for characters
+             before initial " "
+
+           EXEC SQL
+               CONNECT TO :ws-db USER :ws-usr  USING :ws-var-pass
+           END-EXEC
+           if sqlcode not = 0
+                display "Error: cannot connect Test 3 "
+                display sqlcode
+                display sqlerrmc
+                stop run
+           end-if
+           display "Test 3: OK"
+
+           EXEC SQL
+               CONNECT RESET
+           END-EXEC
+           if sqlcode not = 0
+                display "Error: cannot disconnect "
+                display sqlcode
+                display sqlerrmc
+                stop run
+           end-if
+           stop run.
+           END PROGRAM CONNDB.
