@@ -20,5 +20,13 @@ db2cmd -i -w -c db2 -tvf db2_precompile1.sql
 # pause
 read -n1 -r -p "Press any key to continue..." key
 
-cobc -m -std=mf CHECKERR.cbl -I $SYSLIB -L $LOADLIB -l db2api
-cobc -x -std=mf $PGM.cbl -I $SYSLIB -L $LOADLIB -l db2api
+# Added ibm compile flag.
+# Note: Because SQLTEST1 uses CHECKERR module, it can not
+# be compiled with ibm-strict.
+#           COPY "sqlenv.cbl".
+#           COPY "sql.cbl".
+# are MicroFocus copybooks that contain a level 78 value.
+# -std=ibm will allow it. 
+
+cobc -m -std=ibm CHECKERR.cbl -I $SYSLIB -L $LOADLIB -l db2api
+cobc -x -std=ibm $PGM.cbl -I $SYSLIB -L $LOADLIB -l db2api
