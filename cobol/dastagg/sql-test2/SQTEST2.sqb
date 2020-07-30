@@ -34,8 +34,6 @@
 
        WORKING-STORAGE SECTION.
 
-           COPY "sqlenv.cbl".
-           COPY "sql.cbl".
            COPY "sqlca.cbl".
 
            EXEC SQL BEGIN DECLARE SECTION END-EXEC.
