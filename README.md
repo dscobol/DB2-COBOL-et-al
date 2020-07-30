@@ -14,8 +14,7 @@ For now, there are two main areas:
     cobol: These are programs that were written to use the gnuCobol compiler. 
     I don't have access to a DB2 Server on a Mainframe but I can learn this way.
 
-    python: You don't see this yet but it will show up soon. 
-    I just like Python so I will have to try to write some programs to access DB2.
+    python: Well... I'll state the obvious: These are Python programs that connect to DB2.
 
 Under the cobol directory:
 
