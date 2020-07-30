@@ -6,6 +6,6 @@
 !*.sqb
 !*.sh
 !*.sql
-!README.md
+!./README.md
 
 !*/
