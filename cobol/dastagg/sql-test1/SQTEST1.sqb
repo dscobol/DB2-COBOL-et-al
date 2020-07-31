@@ -38,7 +38,7 @@
            12 ME-Commission           PIC S9(9)V99 COMP-3.
 
        01  DB-Connection-Info.
-           12 DB-Alias                PIC X(8) VALUE 'MYSAMPLE'.
+           12 DB-Alias                PIC X(8) VALUE 'SAMPLE'.
            12 DB-User-ID              PIC X(10).
            12 DB-Password.
               15 DB-Passwd-Length     PIC S9(4) COMP-5  VALUE 0.

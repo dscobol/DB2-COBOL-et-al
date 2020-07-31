@@ -21,8 +21,8 @@ Under the cobol directory:
     dastagg: These are programs I have written trying to use my "style". 
     Program structure, naming convention, etc. 
     
-    All these programs will be written to access the Sample DB included with 
-    the installation of IBM DB2. On this Server, it is called "MYSAMPLE".
+    All these programs will be written to access the SAMPLE DB included with 
+    the installation of IBM DB2.
 
     examples: These are programs supplied by IBM or other tutorials that I used 
     to make sure the programs worked. 
