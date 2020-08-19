@@ -1,7 +1,7 @@
 This is a list of the programs and what they do:
 
-| Directory | Program Name     | Description |
-|:----------:|:---------:|:----------------:|:------------|
+| Directory  | Program Name     | Description |
+|:----------:|:----------------:|:------------|
 | dastagg/cbl | SQTEST2 | Uses a cursor to fetch data and creates a formatted report. This removes the CHECKERR module for error handling and uses a WS-Flag instead. |
 | dastagg/cbl | SQTEST3 | Uses a cursor to fetch data and simply displays it. This uses a called GETDBID module because I don't want to have to type in my userid and password everytime I run the program. |
 
