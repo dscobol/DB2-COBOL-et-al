@@ -1,9 +1,10 @@
 This is a list of the programs and what they do:
 
-| Directory | Sub        | Program Name     | Description |
+| Directory | Program Name     | Description |
 |:----------:|:---------:|:----------------:|:------------|
-| dastagg | sql_test1 | SQTEST1 | Uses a cursor to fetch data and simply displays it. This uses CHECKERR module for error handling. |
-| dastagg | sql_test2 | SQTEST2 | Uses a cursor to fetch data and creates a formatted report. This removes the CHECKERR module for error handling and uses a WS-Flag instead. |
+| dastagg/cbl | SQTEST2 | Uses a cursor to fetch data and creates a formatted report. This removes the CHECKERR module for error handling and uses a WS-Flag instead. |
+| dastagg/cbl | SQTEST3 | Uses a cursor to fetch data and simply displays it. This uses a called GETDBID module because I don't want to have to type in my userid and password everytime I run the program. |
+
 
 
 | Directory | Sub        | Program Name     | Description |

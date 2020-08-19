@@ -30,19 +30,8 @@ Under the cobol directory:
     They may access other Schemas.
 
 
-A couple of Installation Notes:
+Installation Notes:
+
+Also look at the docs directory under cobol/dastagg for documents that have more information.
 
 IBM DB2 was installed at C:\ so the path is "C:\IBM\SQLLIB"
-
-In the .bashrc file within cygwin, I added 2 exports to make the 
-shell scripts cleaner:
-
-```
-    export DHOME='/cygdrive/c/Users/dastagg'
-    export RHOME='/cygdrive/c'
-```
-So:
-     
-     DHOME = $HOME on linux
-     RHOME is "C:\".
-
