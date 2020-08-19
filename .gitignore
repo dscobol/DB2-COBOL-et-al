@@ -8,7 +8,7 @@
 # and this COBOL code
 !*.sqb
 !*.sh
-!*.sql
+**/docs/*
 
 # and this Python Code
 !*.py
