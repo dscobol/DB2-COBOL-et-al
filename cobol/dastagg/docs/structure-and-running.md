@@ -75,9 +75,11 @@ They are located in the COB_LIBRARY_PATH.
 So these two exports MUST be exported before running the program.
 
 ## Run the program
+
+I have these scripts, called "program-name".sh in the bin directory.
 ```
 export COB_LIBRARY_PATH="$RHOME/IBM/SQLLIB/BIN"  
 export COB_PRE_LOAD=db2agapi64
 
-../bin/$PGM.exe
+./$PGM.exe
 ```

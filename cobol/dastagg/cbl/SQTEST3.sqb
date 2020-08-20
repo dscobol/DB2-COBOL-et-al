@@ -260,8 +260,8 @@
       *       ACCEPT DB-Passwd-Name.
            
       *    This is where the new code starts:
-      *     MOVE 'GETDBID' TO WS-GetDBId.
-           CALL 'GETDBID' USING DB-User-ID, DB-Passwd-Name.
+           MOVE 'GETDBID' TO WS-GetDBId.
+           CALL WS-GetDBId USING DB-User-ID, DB-Passwd-Name.
       * Passwords in a CONNECT statement must be entered in a VARCHAR
       * format with the length of the input string.
            INSPECT DB-Passwd-Name
